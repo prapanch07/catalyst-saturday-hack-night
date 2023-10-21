@@ -21,13 +21,14 @@ def main(page: ft.Page):
         elif e.route == "/name":
             page.clean()
             page.add(ft.Text("what do you love to be called today ?",color=ft.colors.INDIGO_800,size=30)) 
-            page.add(ft.TextField(label="Name",text_size=18 ,color=ft.colors.INDIGO_800,width=350,border_color=ft.colors.BLACK12))
+            name = ft.TextField(label="Your name",text_size=18 ,color=ft.colors.INDIGO_800,width=350,border_color=ft.colors.BLACK12)
+            page.add(name)
             page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
             page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=lambda _:page.go("/time")))
             page.update()
         elif e.route == "/time":
             page.clean()
-            page.add(ft.Text("how much time do you need to meditate ?",color=ft.colors.INDIGO_800,size=30)) 
+            page.add(ft.Text(name + "how much time do you need to meditate ?",color=ft.colors.INDIGO_800,size=30)) 
             page.add(ft.Slider(width=300,value=5,min=0,max=20,divisions=20,label="{value}min")) 
             page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=lambda _:page.go("/music")))
             page.update()  
