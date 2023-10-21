@@ -1,0 +1,34 @@
+elif e.route == "/music":
+            page.clean()
+            page.add(ft.Text("Which type of music needed ?",color=ft.colors.INDIGO_800,size=30))
+            def button_clicked(e):
+                t.value =  {dd.value}
+                page.update()
+
+            t = ft.Text()
+            b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
+            dd = ft.Dropdown(width=100,options=[
+            ft.dropdown.Option("Nature" , on_click=get_nature),
+            ft.dropdown.Option("Rain",  on_click=get_rain),
+            ft.dropdown.Option("Blue", on_click=lambda _:page.go("/meditate"))])
+            page.add(dd,b,t)
+            page.update()
+
+
+
+
+
+
+
+
+
+                            async def async_timer(duration: int):
+                                start_time = ft.DateTime.now()
+
+                                while True:
+                                    now = ft.DateTime.now()
+                                    elapsed_time = now - start_time
+                                    if elapsed_time >= duration:
+                                        break
+                                    await asyncio.sleep(0.1)
+                            button = ft.ElevatedButton("Start Timer", on_click=lambda _: async_timer(page, 180))
