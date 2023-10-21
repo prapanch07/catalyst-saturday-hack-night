@@ -12,8 +12,8 @@ Mediflet is an awesome meditation app made with Flet. It is easy to use, customi
 Mediflet is the perfect app for anyone who wants to improve their mental and physical well-being through meditation. It is a great way to start your day, relax after a long day, or simply take a break and focus on your breath.
 
 ## Team member
-J Prapanch
-Deepika S R
+![J Prapanch](https://github.com/prapanch07)
+![Deepika S R](https://github.com/DeepikaSR4)
 
 ## Product Walkthrough
 
