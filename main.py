@@ -21,8 +21,8 @@ def main(page: ft.Page):
         elif e.route == "/name":
             page.clean()
             page.add(ft.Text("what do you love to be called today ?",color=ft.colors.INDIGO_800,size=30)) 
-            name = ft.TextField(label="Your name")
-            page.add(name,text_size=18 ,color=ft.colors.INDIGO_800,width=350,border_color=ft.colors.BLACK12)
+            name = ft.TextField(label="Your name",text_size=18 ,color=ft.colors.INDIGO_800,width=350,border_color=ft.colors.BLACK12)
+            page.add(name)
             page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
             page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=lambda _:page.go("/time")))
             page.update()
