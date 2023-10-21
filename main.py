@@ -11,7 +11,6 @@ def main(page: ft.Page):
     page.update()
 
     page.add(ft.ElevatedButton("Get Started", on_click=lambda _: page.go("/card")))
-
     def route_change(e: ft.RouteChangeEvent):
         if e.route == "/card":
             page.clean()
@@ -24,11 +23,13 @@ def main(page: ft.Page):
             name = ft.TextField(label="Your name",text_size=18 ,color=ft.colors.INDIGO_800,width=350,border_color=ft.colors.BLACK12)
             page.add(name)
             page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+            entername = name.value
             page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=lambda _:page.go("/time")))
             page.update()
         elif e.route == "/time":
             page.clean()
-            page.add(ft.Text(name + "how much time do you need to meditate ?",color=ft.colors.INDIGO_800,size=30)) 
+            page.add(ft.Text("How much time do you want to meditate ?",color=ft.colors.INDIGO_800,size=30))
+            page.add(ft.Text("Start with a small amount like 3 minutes",color=ft.colors.INDIGO_400,size=20)) 
             page.add(ft.Slider(width=300,value=5,min=0,max=20,divisions=20,label="{value}min")) 
             page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=lambda _:page.go("/music")))
             page.update()  
