@@ -16,17 +16,64 @@ def main(page: ft.Page):
     page.add(ft.ElevatedButton("Get Started", on_click=lambda _: page.go("/card")))
 
     def route_change(e: ft.RouteChangeEvent):
-        timerr =0
+        timerr = 1
         if e.route == "/card":
             page.clean()
-            page.add(ft.Text("Meditation is good for health",color=ft.colors.INDIGO_800,size=30))
-            page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=lambda _:page.go("/name")))
+            page.add(ft.Text("Benifits of Meditation",color=ft.colors.INDIGO_800,size=30))
+            page.add(
+        ft.Row(
+            [
+                ft.Container(
+                    content=ft.Text("Meditation reduces stress and anxiety", color=ft.colors.BLACK87),
+                    margin=10,
+                    padding=10,
+                    alignment=ft.alignment.center,
+                    bgcolor=ft.colors.AMBER_100,
+                    width=150,
+                    height=150,
+                    border_radius=10,
+                ),
+                ft.Container(
+                    content=ft.Text("Improved focus and concentration through meditation.", color=ft.colors.BLACK87),
+                    margin=10,
+                    padding=10,
+                    alignment=ft.alignment.center,
+                    bgcolor=ft.colors.RED_200,
+                    width=150,
+                    height=150,
+                    border_radius=10,
+                ),
+                ft.Container(
+                    content=ft.Text("Better sleep quality with a regular meditation practice.", color=ft.colors.BLACK87),
+                    margin=10,
+                    padding=10,
+                    alignment=ft.alignment.center,
+                    bgcolor=ft.colors.PURPLE_200,
+                    width=150,
+                    height=150,
+                    border_radius=10,
+                ),
+                ft.Container(
+                    content=ft.Text("Boosts creativity and problem-solving skills", color=ft.colors.BLACK87),
+                    margin=10,
+                    padding=10,
+                    alignment=ft.alignment.center,
+                    bgcolor=ft.colors.CYAN_200,
+                    width=150,
+                    height=150,
+                    border_radius=10,
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+        ),
+    )
+            page.add(ft.IconButton(ft.icons.ARROW_FORWARD_ROUNDED,on_click=lambda _:page.go("/name"),icon_color=ft.colors.INDIGO_200,width=100))
             page.update()
             
 
         elif e.route == "/name":
             page.clean()
-            page.add(ft.Text("what do you love to be called today ?",color=ft.colors.INDIGO_800,size=30)) 
+            page.add(ft.Text("What do you love to be called today ?",color=ft.colors.INDIGO_800,size=30)) 
             t = ft.Text()
             name = ft.TextField(label="Your name",text_size=18 ,color=ft.colors.INDIGO_800,width=350,border_color=ft.colors.BLACK12)
             page.add(name)
@@ -40,9 +87,9 @@ def main(page: ft.Page):
                 tt = ft.Text("how much time do you want to meditate ?",color=ft.colors.INDIGO_800,size=30)
                 x = t.value
                 y = tt.value
-                page.add(ft.Text(x+"!! ,"+y,color=ft.colors.INDIGO_800,size=20))
-                page.add(ft.Text("Start with a small amount like 3 minutes",color=ft.colors.INDIGO_400,size=20))
-                
+                page.add(ft.Text(x+"!! ,"+y,color=ft.colors.INDIGO_800,size=30))
+                page.add(ft.Text("Start with a small amount like 3 minutes",color=ft.colors.INDIGO_400,size=15))
+                page.add(ft.Text("Please select a time to proceed", color=ft.colors.INDIGO_200,size=10))
                 def slider_changed(e):
                     nonlocal timerr
                     timerr = e.control.value 
@@ -51,11 +98,11 @@ def main(page: ft.Page):
                 timer =  ft.Slider(width=300,min=1,max=20,divisions=20,label="{value}min",on_change=slider_changed)
                 page.add(timer)
                 page.update()
-                page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=lambda _:page.go("/music")))
+                page.add(ft.IconButton(ft.icons.ARROW_FORWARD_ROUNDED,on_click=lambda _:page.go("/music"),icon_color=ft.colors.INDIGO_200,width=100))
                 page.update()
 
                 
-            page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=button_clicked))
+            page.add(ft.IconButton(ft.icons.ARROW_FORWARD_ROUNDED,on_click=button_clicked,icon_color=ft.colors.INDIGO_200,width=100))
             page.update() 
 
         elif e.route == "/music":
@@ -79,6 +126,7 @@ def main(page: ft.Page):
                                 for i in range(minutes, 0, -1):  
                                     t.value = f"Time remaining: {i} seconds "  
                                     page.add(t)
+                                    page.add(ft.ElevatedButton(text="Stop",on_click=lambda _:page.go("/home")))
                                     page.update()
                                     await asyncio.sleep(1)
                                   
@@ -100,15 +148,14 @@ def main(page: ft.Page):
 
                         page.update()
 
-                elif dd =="Rain":
+                elif dd.value =="Rain":
+                        page.clean()
                         def get_rain():
-                            page.clean()
-
                             async def countdown(e):
-                                audio1 = ft.Audio(
-                                    src="rain.mp3", autoplay=True
+                                audio2 = ft.Audio(
+                                    src="rain.mp3", autoplay=True,
                                 )
-                                page.overlay.append(audio1)
+                                page.overlay.append(audio2)
                                 for i in range(minutes, 0, -1):  
                                     t.value = f"Time remaining: {i} seconds "  
                                     page.add(t)
@@ -119,7 +166,7 @@ def main(page: ft.Page):
                              
                                 page.clean()
                                 t.value = "Time's up!"
-                                audio1.release()
+                                audio2.release()
                                 page.add(t)
                                 page.update() 
 
@@ -127,8 +174,11 @@ def main(page: ft.Page):
                             countdown_loop = asyncio.new_event_loop()
                             asyncio.set_event_loop(countdown_loop)
                             asyncio.run(countdown(timerr))
+                            page.add(ft.ElevatedButton(text="Restart",on_click=lambda _:page.go("/home")))
+                            
 
                         get_rain()
+                        page.update()
                         
                 else:
                     def goto_meditate():
@@ -144,6 +194,7 @@ def main(page: ft.Page):
                                
                                 page.clean()
                                 t.value = "Time's up!"
+                                
                                 page.add(t)
                                 page.add(ft.ElevatedButton(text="Restart",on_click=lambda _:page.go("/home")))
                                 page.update() 
@@ -154,6 +205,7 @@ def main(page: ft.Page):
                         asyncio.run(countdown(timerr))
 
                     goto_meditate()
+                    page.update()
                 page.update()
 
             t = ft.Text(color=ft.colors.INDIGO_300,size=15)
