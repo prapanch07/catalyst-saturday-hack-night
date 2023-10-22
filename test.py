@@ -1,3 +1,5 @@
+#this is a test file where we tested each compontent seperately, this doesn't have any role in execution of the mediflet app
+
 import flet as ft
 
 def main(page: ft.Page):
