@@ -110,7 +110,7 @@ def main(page: ft.Page):
             page.add(ft.Text("Which type of music needed ?",color=ft.colors.INDIGO_800,size=30))
 
             def button_clicked(e):
-                t.value = f"Selected : {dd.value}"
+               
                 ti = int(page.session.get('count'))
                 
                 minutes = ti * 60
@@ -210,10 +210,12 @@ def main(page: ft.Page):
             t = ft.Text(color=ft.colors.INDIGO_300,size=15)
             b = ft.ElevatedButton(text="Start", on_click=button_clicked)
             dd = ft.Dropdown(
+                focused_color= ft.colors.INDIGO_300,   
+               
             width=100,
             options=[
             ft.dropdown.Option("Nature"),
-            ft.dropdown.Option("Rain"),
+            ft.dropdown.Option("Rain"), 
             ft.dropdown.Option("None"),
             ],
             )
