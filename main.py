@@ -48,7 +48,7 @@ def main(page: ft.Page):
                     timerr = e.control.value 
                     page.update()
                     page.session.set("count", timerr)
-                timer =  ft.Slider(width=300,min=1,max=20,divisions=20,label="{value}min",on_change=slider_changed)
+                timer =  ft.Slider(width=300,min=1,max=20,divisions=40,label="{value}min",on_change=slider_changed)
                 page.add(timer)
                 page.update()
                 page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=lambda _:page.go("/music")))
@@ -64,7 +64,7 @@ def main(page: ft.Page):
 
             def button_clicked(e):
                 t.value = f"Selected : {dd.value}"
-                ti = int(page.session.get("count"))
+                ti = int(page.session.get('count'))
                 
                 minutes = ti * 60
                 
@@ -72,16 +72,21 @@ def main(page: ft.Page):
                         page.clean()
                         def get_nature():
                             async def countdown(e):
+                                audio1 = ft.Audio(
+                                    src="https://luan.xyz/files/audio/ambient_c_motion.mp3", autoplay=True
+                                )
+                                page.overlay.append(audio1)
                                 for i in range(minutes, 0, -1):  
                                     t.value = f"Time remaining: {i} seconds "  
-                                   
-
                                     page.add(t)
                                     page.update()
-                                    await asyncio.sleep(1) 
+                                    await asyncio.sleep(1)
+                                  
                                
-                               
+                             
+                                page.clean()
                                 t.value = "Time's up!"
+                                audio1.release()
                                 page.add(t)
                                 page.update() 
 
@@ -89,8 +94,10 @@ def main(page: ft.Page):
                             countdown_loop = asyncio.new_event_loop()
                             asyncio.set_event_loop(countdown_loop)
                             asyncio.run(countdown(timerr))
+                            page.add(ft.ElevatedButton(text="Restart",on_click=lambda _:page.go("/page")))
 
                         get_nature()
+
                         page.update()
 
                 elif dd =="Rain":
@@ -105,9 +112,10 @@ def main(page: ft.Page):
                                     page.update()
                                     await asyncio.sleep(1) 
                                
-                               
+                                page.clean()
                                 t.value = "Time's up!"
                                 page.add(t)
+                                page.add(ft.ElevatedButton(label="Restart",on_click=lambda _:page.go("/page")))
                                 page.update() 
 
                     
@@ -129,11 +137,12 @@ def main(page: ft.Page):
                                     page.update()
                                     await asyncio.sleep(1) 
                                
-                               
+                                page.clean()
                                 t.value = "Time's up!"
                                 page.add(t)
+                                page.add(ft.ElevatedButton(text="Restart",on_click=lambda _:page.go("/name")))
                                 page.update() 
-
+                                
                     
                         countdown_loop = asyncio.new_event_loop()
                         asyncio.set_event_loop(countdown_loop)
@@ -143,7 +152,7 @@ def main(page: ft.Page):
                 page.update()
 
             t = ft.Text(color=ft.colors.INDIGO_300,size=15)
-            b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
+            b = ft.ElevatedButton(text="Start", on_click=button_clicked)
             dd = ft.Dropdown(
             width=100,
             options=[
