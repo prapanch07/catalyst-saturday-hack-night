@@ -126,7 +126,6 @@ def main(page: ft.Page):
                                 for i in range(minutes, 0, -1):  
                                     t.value = f"Time remaining: {i} seconds "  
                                     page.add(t)
-                                    page.add(ft.ElevatedButton(text="Stop",on_click=lambda _:page.go("/home")))
                                     page.update()
                                     await asyncio.sleep(1)
                                   
