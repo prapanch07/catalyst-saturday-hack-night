@@ -130,7 +130,8 @@ def main(page: ft.Page):
                                     await asyncio.sleep(1)
                                   
                                
-                             
+                                
+                                audio1.release()
                                 page.clean()
                                 t.value = "Time's up!"
                                 audio1.release()
@@ -162,7 +163,7 @@ def main(page: ft.Page):
                                     await asyncio.sleep(1)
                                   
                                
-                             
+                                audio2.release()
                                 page.clean()
                                 t.value = "Time's up!"
                                 audio2.release()

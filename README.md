@@ -17,6 +17,8 @@ Mediflet is the perfect app for anyone who wants to improve their mental and phy
 
 ## Product Walkthrough
 
+![Watch Video](https://youtu.be/3CPBfRoZJ2g)
+
 ## How it works?
 
 - The user learns about the importance of meditation.
