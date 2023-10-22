@@ -94,7 +94,7 @@ def main(page: ft.Page):
                             countdown_loop = asyncio.new_event_loop()
                             asyncio.set_event_loop(countdown_loop)
                             asyncio.run(countdown(timerr))
-                            page.add(ft.ElevatedButton(text="Restart",on_click=lambda _:page.go("/page")))
+                            page.add(ft.ElevatedButton(text="Restart",on_click=lambda _:page.go("/home")))
 
                         get_nature()
 
@@ -115,7 +115,7 @@ def main(page: ft.Page):
                                 page.clean()
                                 t.value = "Time's up!"
                                 page.add(t)
-                                page.add(ft.ElevatedButton(label="Restart",on_click=lambda _:page.go("/page")))
+                                page.add(ft.ElevatedButton(label="Restart",on_click=lambda _:page.go("/home")))
                                 page.update() 
 
                     
@@ -140,7 +140,7 @@ def main(page: ft.Page):
                                 page.clean()
                                 t.value = "Time's up!"
                                 page.add(t)
-                                page.add(ft.ElevatedButton(text="Restart",on_click=lambda _:page.go("/name")))
+                                page.add(ft.ElevatedButton(text="Restart",on_click=lambda _:page.go("/home")))
                                 page.update() 
                                 
                     
@@ -165,6 +165,11 @@ def main(page: ft.Page):
 
           
             page.update()
+        elif e.route=="/home":
+                page.clean()
+                page.add(ft.Text("MediFlet",color= ft.colors.INDIGO_500,size=50)) 
+                page.add(ft.ElevatedButton("Start Again", on_click=lambda _: page.go("/card")))
+                page.update()
 
  
  
