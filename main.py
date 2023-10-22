@@ -45,18 +45,18 @@ def main(page: ft.Page):
                 
                 def slider_changed(e):
                     nonlocal timerr
-                    timerr = f"{e.control.value}"
+                    timerr = e.control.value 
                     page.update()
-                timer =  ft.Slider(width=300,value=0,min=0,max=20,divisions=10,label="{value}min",on_change=slider_changed)
+                    page.session.set("count", timerr)
+                timer =  ft.Slider(width=300,min=1,max=20,divisions=20,label="{value}min",on_change=slider_changed)
                 page.add(timer)
-                page.add(ft.Text(timerr))
                 page.update()
                 page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=lambda _:page.go("/music")))
                 page.update()
 
-               
+                
             page.add(ft.IconButton(ft.icons.ARROW_FORWARD_IOS_ROUNDED,on_click=button_clicked))
-            page.update()
+            page.update() 
 
         elif e.route == "/music":
             page.clean()
@@ -64,21 +64,28 @@ def main(page: ft.Page):
 
             def button_clicked(e):
                 t.value = f"Selected : {dd.value}"
-                if dd.value == "Nature":
+                ti = int(page.session.get("count"))
+                
+                minutes = ti * 60
+                
+                if dd.value == "Nature": 
                         page.clean()
                         def get_nature():
-                            async def countdown(timerr):
-                                for i in range(timerr, 0, -1):  
-                                    t.value = f"Time remaining: {i} seconds"
+                            async def countdown(e):
+                                for i in range(minutes, 0, -1):  
+                                    t.value = f"Time remaining: {i} seconds "  
+                                   
+
                                     page.add(t)
                                     page.update()
-                                    await asyncio.sleep(1)
-                        
+                                    await asyncio.sleep(1) 
+                               
+                               
                                 t.value = "Time's up!"
                                 page.add(t)
-                                page.update()
+                                page.update() 
 
-                   
+                    
                             countdown_loop = asyncio.new_event_loop()
                             asyncio.set_event_loop(countdown_loop)
                             asyncio.run(countdown(timerr))
@@ -88,11 +95,50 @@ def main(page: ft.Page):
 
                 elif dd =="Rain":
                         def get_rain():
-                            pass
+                            page.clean()
+                            async def countdown(e):
+                                for i in range(minutes, 0, -1):  
+                                    t.value = f"Time remaining: {i} seconds "  
+                                   
+
+                                    page.add(t)
+                                    page.update()
+                                    await asyncio.sleep(1) 
+                               
+                               
+                                t.value = "Time's up!"
+                                page.add(t)
+                                page.update() 
+
+                    
+                            countdown_loop = asyncio.new_event_loop()
+                            asyncio.set_event_loop(countdown_loop)
+                            asyncio.run(countdown(timerr))
+
                         get_rain()
+                        
                 else:
                     def goto_meditate():
-                        pass
+                        page.clean()
+                        async def countdown(e):
+                                for i in range(minutes, 0, -1):  
+                                    t.value = f"Time remaining: {i} seconds "  
+                                   
+
+                                    page.add(t)
+                                    page.update()
+                                    await asyncio.sleep(1) 
+                               
+                               
+                                t.value = "Time's up!"
+                                page.add(t)
+                                page.update() 
+
+                    
+                        countdown_loop = asyncio.new_event_loop()
+                        asyncio.set_event_loop(countdown_loop)
+                        asyncio.run(countdown(timerr))
+
                     goto_meditate()
                 page.update()
 
